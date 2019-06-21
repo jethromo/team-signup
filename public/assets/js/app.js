@@ -89,7 +89,7 @@
           initHandlers();
         });
       });
-    }, 500);
+    }, 900);
   }
 
   initHandlers();
