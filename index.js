@@ -40,18 +40,34 @@ const escapeInsertedString = (string) => {
   return string.replace(/\'/g, '\'\'')
 };
 
+const isTeamFull = (team_id) => {
+  return queryDB(`SELECT * FROM ${table_name} WHERE team_id = '${team_id}' AND confirmed = true`).then(exists => {
+    return exists.length >= getTeamConfig()[team_id].slots;
+  });
+};
+
+const alreadyJoined = (user_guid) => {
+  return queryDB(`SELECT * FROM ${table_name} WHERE member_guid = '${user_guid}' AND confirmed = true`).then(found => found.length > 0);
+};
+
 const signupUser = (data) => {
   data.expires = `LOCALTIMESTAMP + interval '3 minute'`;
-  return queryDB(`SELECT * FROM ${table_name} WHERE member_guid = '${data.guid}'`).then(exists => {
-    if (exists.length === 0) {
-      return queryDB(`
-        INSERT INTO ${table_name} 
-          (member_guid, member_name, team_id, expires, confirmed)
-        VALUES
-          ('${data.guid}', '${escapeInsertedString(data.full_name)}', '${data.team_id}', ${data.expires}, 'true')
-      `).then(r => {
-        return { success: Array.isArray(r) };
-      })
+  return alreadyJoined(data.guid).then(joined => {
+    if (!joined) {
+      return isTeamFull(data.team_id).then((full) => {
+        if (full) {
+          return { success: false, reason: 'Sorry, but this team is full.' };
+        } else {
+          return queryDB(`
+            INSERT INTO ${table_name} 
+              (member_guid, member_name, team_id, expires, confirmed)
+            VALUES
+              ('${data.guid}', '${escapeInsertedString(data.full_name)}', '${data.team_id}', ${data.expires}, 'true')
+          `).then(r => {
+            return { success: Array.isArray(r) };
+          })
+        }
+      });
     } else {
       return { success: false, reason: 'You already joined a team!' };
     }
@@ -67,12 +83,19 @@ const slugify = (text) => {
     .replace(/-+$/, '');            // Trim - from end of text
 }
 
-const getTeams = (members, user) => {
+const getTeamConfig = () => {
   return require('./config/teams.json')
     .filter((team) => team && team.name && team.slots > 0)
     .map((team, index) => {
       team.id = index;
       team.slug = slugify(team.name);
+      return team;
+    });
+};
+
+const getTeams = (members, user) => {
+  return getTeamConfig()
+    .map((team) => {
       team.members = members.filter((member) => {
         member.isMe = member.member_guid === user.guid;
         if (member.isMe) {
