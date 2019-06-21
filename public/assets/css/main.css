@@ -3,6 +3,10 @@ body {
     margin: 36px;
 }
 
+.team-signup__name-entry {
+    min-width: 300px;
+}
+
 .team-signup__team-listing > li {
     margin: 3rem 0;
 }
@@ -10,10 +14,6 @@ body {
 .team-signup__team-listing .is-active {
     font-weight: bold;
     background: #dedede;
-}
-
-.team-signup__team-listing form [name=full_name] {
-    min-width: 300px;
 }
 
 .is-hidden {
