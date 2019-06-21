@@ -30,16 +30,23 @@ const {
 //accessDB();
 
 const queryDB = (query) => {
-  const pool = new Pool();
+  const { Client } = require('pg');
+
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: false,
+  });
+  
+  client.connect();
 
   console.log({query});
-
+  
   return new Promise(resolve => {
-    pool.query(query, (err, res) => {
+    client.query(query, (err, res) => {
       if (err) {
         console.error(err);
       }
-      pool.end();
+      client.end();
       resolve(res && res.rows ? res.rows : res);
     });
   });
