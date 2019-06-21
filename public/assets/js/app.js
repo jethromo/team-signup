@@ -72,9 +72,11 @@
     
     $('[data-api-action]').map(function(ele) {
       ele.onclick = function() {
-        apiAction(ele.getAttribute('href'), function() {
-          refresh();
-        });
+        if (confirm('Are you sure?')) {
+          apiAction(ele.getAttribute('href'), function() {
+            refresh();
+          });
+        }
         return false;
       };
     });
