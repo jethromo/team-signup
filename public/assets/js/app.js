@@ -23,9 +23,9 @@ function apiAction(url, success) {
             alert(json.reason ? json.reason : request.responseText);
         }
     };
-    request.onerror = function(err) {
-        alert('error', err);
-    };
+    // request.onerror = function(err) {
+    //     alert('error', err);
+    // };
 
     request.send();
 }
@@ -37,9 +37,9 @@ function getRemote(url, success) {
     request.onload = function() {
         success(request.responseText);
     };
-    request.onerror = function(err) {
-        alert('error', err);
-    };
+    // request.onerror = function(err) {
+    //     alert('error', err);
+    // };
 
     request.send();
 }
@@ -89,9 +89,9 @@ function initHandlers() {
 
 function autoRefresh() {
     setInterval(function() {
-        $('[data-member-listing-team-id').map(function(memberList) {
-            var id = memberList.getAttribute('data-member-listing-team-id');
-            getRemote('/members?is_admin=' + window.config.is_admin.toString() + '&team_id=' + id, function(response) {
+        $('[data-team-id').map(function(memberList) {
+            var id = memberList.getAttribute('data-team-id');
+            getRemote('/team?is_admin=' + window.config.is_admin.toString() + '&team_id=' + id, function(response) {
                 memberList.innerHTML = response;
                 initHandlers();
             });

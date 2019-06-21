@@ -34,7 +34,9 @@
 
   <ul class="team-signup__team-listing">
       <% teams.forEach(function(team){ %>
-        <%- include('../partials/team.ejs', { team }); %>
+        <li data-team-id="<%= team.id %>">
+          <%- include('../partials/team.ejs', { team }); %>
+        </li>
       <% }); %>
   </ul>
 

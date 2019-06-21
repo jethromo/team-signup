@@ -1,24 +1,19 @@
-<% if (team && team.name && team.slots > 0) { %>
-    <li id="<%= team.slug %>">
-        <h2><%= team.name %></h2>
-        <h3>Led by <%= team.leader %></h3>
-        <p><%= team.description %></p>
+<h2><%= team.name %></h2>
+<h3>Led by <%= team.leader %></h3>
+<p><%= team.description %></p>
 
-        <% if (!user.signedUp && user.full_name) { %>
-            <form action="/api/signup" method="GET" data-form-name="team-signup" data-form-slug="<%= team.slug %>" class="<%= (team.members.length < team.slots) ? '' : 'is-hidden' %>">
-                <input type="hidden" name="guid" value="<%= user.guid %>" />
-                <input type="hidden" name="team_id" value="<%= team.id %>" />
-                <input type="hidden" name="full_name" value="<%= user.full_name %>" />
-                <input type="submit" value="Sign Me Up!" />
-            </form>
-        <% } %>
+<% if (!user.signedUp && user.full_name) { %>
+    <form action="/api/signup" method="GET" data-form-name="team-signup" data-form-slug="<%= team.slug %>" class="<%= (team.members.length < team.slots) ? '' : 'is-hidden' %>">
+        <input type="hidden" name="guid" value="<%= user.guid %>" />
+        <input type="hidden" name="team_id" value="<%= team.id %>" />
+        <input type="hidden" name="full_name" value="<%= user.full_name %>" />
+        <input type="submit" value="Sign Me Up!" />
+    </form>
+<% } %>
 
-        <% if (team.members.length > 0) { %>
-            <h3>Current Members:</h3>
-            <ul data-member-listing-team-id="<%= team.id %>">
-                <% include members.ejs %>
-            </ul>
-        <% } %>
-        
-    </li>
+<% if (team.members.length > 0) { %>
+    <h3>Current Members:</h3>
+    <ul>
+        <% include members.ejs %>
+    </ul>
 <% } %>

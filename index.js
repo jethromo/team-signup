@@ -58,7 +58,7 @@ const signupUser = (data) => {
   });
 };
 
-function slugify(text) {
+const slugify = (text) => {
   return text.toString().toLowerCase()
     .replace(/\s+/g, '-')           // Replace spaces with -
     .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
@@ -69,10 +69,11 @@ function slugify(text) {
 
 const getTeams = (members, user) => {
   return require('./config/teams.json')
+    .filter((team) => team && team.name && team.slots > 0)
     .map((team, index) => {
       team.id = index;
       team.slug = slugify(team.name);
-      team.members = members.filter(function(member) {
+      team.members = members.filter((member) => {
         member.isMe = member.member_guid === user.guid;
         if (member.isMe) {
           user.signedUp = true;
@@ -103,7 +104,21 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   
-  .get('/members', (req, res) => getDefaultData(req).then(data => res.render('partials/members', { user: { is_admin: req.query.is_admin === 'true' }, team: data.teams[req.query.team_id] })))
+  .get('/team', (req, res) => getDefaultData(req).then(data => {
+    const team = data.teams[req.query.team_id];
+    const user = getUser(req);
+    user.is_admin = req.query.is_admin === 'true';
+    user.team_id = req.query.team_id
+    team.members.map((member) => {
+      if (member.member_guid === user.guid) {
+        user.signedUp = true;
+      }
+    });
+    res.render('partials/team', {
+      user,
+      team
+    })
+  }))
 
   .get('/', getHomepage)
   .get('/admin', getHomepage)
