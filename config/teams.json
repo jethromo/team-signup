@@ -1,0 +1,50 @@
+[
+    {
+        "name": "The Fabulous Thunderbirds",
+        "description": "Proin tempor, risus vel mattis mattis, enim sem venenatis arcu, sit amet dapibus sapien urna et erat. Aenean dapibus at nisl id faucibus. Pellentesque egestas tempor dui, eu consequat enim efficitur non. In tristique dignissim tortor. Curabitur pulvinar vitae nibh vel malesuada. Nunc sodales pellentesque ante. Etiam neque magna, lobortis ut congue sit amet, volutpat non massa. Nulla justo enim, rutrum hendrerit orci vitae, interdum eleifend ipsum. Nulla euismod interdum dapibus.",
+        "leader": "Barack Obama",
+        "slots": 8
+    },
+    {
+        "name": "The OLAM Warriors",
+        "description": "Nam volutpat, purus id consectetur aliquam, enim nunc placerat tortor, bibendum luctus nunc massa in urna. Duis id commodo ex. Praesent molestie, urna non pulvinar feugiat, libero erat imperdiet metus, ac mattis massa tellus viverra massa. Morbi eleifend sit amet odio id ornare. Ut vestibulum molestie tempus. In hac habitasse platea dictumst. Sed in sodales justo, at posuere augue. Etiam a finibus diam.",
+        "leader": "Bruce Springstein",
+        "slots": 7
+    },
+    {
+        "name": "",
+        "description": "",
+        "leader": "",
+        "slots": 7
+    },
+    {
+        "name": "",
+        "description": "",
+        "leader": "",
+        "slots": 7
+    },
+    {
+        "name": "",
+        "description": "",
+        "leader": "",
+        "slots": 7
+    },
+    {
+        "name": "",
+        "description": "",
+        "leader": "",
+        "slots": 7
+    },
+    {
+        "name": "",
+        "description": "",
+        "leader": "",
+        "slots": 7
+    },
+    {
+        "name": "",
+        "description": "",
+        "leader": "",
+        "slots": 7
+    }
+]

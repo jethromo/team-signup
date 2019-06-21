@@ -1,0 +1,38 @@
+{
+  "name": "team-signup",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "node": "12.4.x"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "watch": "nodemon index.js",
+    "live": "browser-refresh index.js --dev",
+    "test": "node test.js",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.4",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "express-session": "^1.16.2",
+    "md5": "^2.2.1",
+    "pg": "^7.11.0"
+  },
+  "devDependencies": {
+    "request": "^2.81.0",
+    "tape": "^4.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jefferymoore83/team-signup"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
+}

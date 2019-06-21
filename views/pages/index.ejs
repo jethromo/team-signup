@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+
+  <!-- <% include ../partials/nav.ejs %> -->
+
+  <h1><%= app.name %></h1>
+
+  <% if (app.config.devMode) { %>
+    <em>my guid: <%= user.guid %></em>
+  <% } %>
+
+  <h2>Admin Tools:</h2>
+
+  <% if (user.is_admin) { %>
+    <a href="/api/admin/reset" data-api-action>Reset Teams &gt;</a>
+  <% } else { %>
+    <h2>The following teams are available to join:</h2>
+  <% } %>
+
+  <ul class="team-signup__team-listing">
+      <% teams.forEach(function(team){ %>
+        <%- include('../partials/team.ejs', { team }); %>
+      <% }); %>
+  </ul>
+
+  <% if (app.config.devMode) { %>
+    <script src="<%= app.config.browserRefreshURL %>"></script>
+  <% } %>  
+
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 36px;
+}
+
+.team-signup__team-listing > li {
+    margin: 3rem 0;
+}
+
+.team-signup__team-listing form [name=full_name] {
+    min-width: 300px;
+}
+
+.is-hidden {
+    display: none;
+}
