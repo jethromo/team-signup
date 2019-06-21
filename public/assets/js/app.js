@@ -45,9 +45,9 @@ function getRemote(url, success) {
 }
 
 function refresh(hash) {
-    if (hash) {
-        window.location.hash = '#' + hash;
-    }
+    // if (hash) {
+    //     window.location.hash = '#' + hash;
+    // }
     window.location.reload();
 }
 
