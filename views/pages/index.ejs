@@ -11,12 +11,30 @@
 
   <h1><%= app.name %></h1>
 
-  <% if (app.config.devMode) { %>
-    <em>my guid: <%= user.guid %></em>
+  <% if (user.is_admin) { %>
+    <h2>Admin Tools:</h2>
+    <a href="/api/admin/reset" data-api-action>Reset Teams &gt;</a>
   <% } %>
 
-  <% if (user.full_name) { %>
-    <h3>Hi, <%= user.full_name %>!</h3>
+  <% if (user.full_name || user.is_admin) { %>
+    <h3>Hi, <%= user.full_name || 'admin' %>!</h3>
+    <% if (!user.is_admin) { %>
+      <a href="/api/setname?full_name=" data-api-action>Clear Name</a>
+    <%  } %>
+
+    <% if (app.config.devMode) { %>
+      <p><em>my guid: <%= user.guid %></em></p>
+    <% } %>
+
+    <h2>The following teams are available to join:</h2>
+
+    <ul class="team-signup__team-listing">
+        <% teams.forEach(function(team){ %>
+          <li data-team-id="<%= team.id %>">
+            <%- include('../partials/team.ejs', { team }); %>
+          </li>
+        <% }); %>
+    </ul>
   <% } else { %>
     <form action="/api/setname" method="GET" data-form-name="enter-name">
       <h3>Enter your full name please.</h3>
@@ -24,21 +42,6 @@
       <input type="submit" value="Submit" />
     </form>
   <% } %>
-
-  <% if (user.is_admin) { %>
-    <h2>Admin Tools:</h2>
-    <a href="/api/admin/reset" data-api-action>Reset Teams &gt;</a>
-  <% } else { %>
-    <h2>The following teams are available to join:</h2>
-  <% } %>
-
-  <ul class="team-signup__team-listing">
-      <% teams.forEach(function(team){ %>
-        <li data-team-id="<%= team.id %>">
-          <%- include('../partials/team.ejs', { team }); %>
-        </li>
-      <% }); %>
-  </ul>
 
   <% if (app.config.devMode) { %>
     <script src="<%= app.config.browserRefreshURL %>"></script>
