@@ -14,9 +14,8 @@
     <em>my guid: <%= user.guid %></em>
   <% } %>
 
-  <h2>Admin Tools:</h2>
-
   <% if (user.is_admin) { %>
+    <h2>Admin Tools:</h2>
     <a href="/api/admin/reset" data-api-action>Reset Teams &gt;</a>
   <% } else { %>
     <h2>The following teams are available to join:</h2>
