@@ -1,3 +1,5 @@
+(function() {
+
 var $ = function(sel, parent) {
     if (!parent) {
         parent = document;
@@ -10,15 +12,30 @@ function apiAction(url, success) {
     
     request.open('GET', url, true);
     request.onload = function() {
+        var json = JSON.parse(request.responseText);
         if (request.status >= 200 && 
             request.status < 400 && 
             request.responseText && 
-            JSON.parse(request.responseText).success === true
+            json.success === true
         ) {
             success(request);
         } else {
-            alert(request.responseText);
+            alert(json.reason ? json.reason : request.responseText);
         }
+    };
+    request.onerror = function(err) {
+        alert('error', err);
+    };
+
+    request.send();
+}
+
+function getRemote(url, success) {
+    var request = new XMLHttpRequest();
+    
+    request.open('GET', url, true);
+    request.onload = function() {
+        success(request.responseText);
     };
     request.onerror = function(err) {
         alert('error', err);
@@ -35,7 +52,7 @@ function refresh(hash) {
 }
 
 function initHandlers() {
-    $('[data-form-name="team-signup"]').map(function(form) {
+    $('[data-form-name="enter-name"], [data-form-name="team-signup"]').map(function(form) {
         var error = false;
         
         form.onsubmit = function() {
@@ -52,9 +69,7 @@ function initHandlers() {
                 apiAction(
                     form.action + '?' + queryStr.join('&'), 
                     function() {
-                        refresh(
-                            form.getAttribute('data-form-slug')
-                        )
+                        refresh()
                     }
                 );
             }
@@ -72,4 +87,19 @@ function initHandlers() {
     });
 }
 
+function autoRefresh() {
+    setInterval(function() {
+        $('[data-member-listing-team-id').map(function(memberList) {
+            var id = memberList.getAttribute('data-member-listing-team-id');
+            getRemote('/members?is_admin=' + window.config.is_admin.toString() + '&team_id=' + id, function(response) {
+                memberList.innerHTML = response;
+                initHandlers();
+            });
+        })
+    }, 500);
+}
+
 initHandlers();
+autoRefresh();
+
+})();

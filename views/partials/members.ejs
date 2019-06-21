@@ -1,0 +1,18 @@
+<% team.members.forEach(function(member){ %>
+
+<li class="<%= member.isMe ? 'is-active' : '' %>" data-member_guid="<%= member.member_guid %>">
+    <%= member.member_name %> <%= member.isMe ? '(me)' : '' %>
+    
+    <% if (user.is_admin || member.isMe) { %>
+        <a href="/api/admin/remove_member?guid=<%= member.member_guid %>" data-api-action>
+            <% if (user.is_admin) { %>
+                Remove from team
+            <% } else if (member.isMe) { %>
+                Leave team
+            <% } %>
+        </a>
+    <% } %>
+        
+</li>
+
+<% }); %>

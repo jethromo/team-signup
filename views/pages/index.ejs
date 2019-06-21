@@ -2,16 +2,27 @@
 <html>
 <head>
   <% include ../partials/header.ejs %>
+  <script>
+  var config = { is_admin: <%= user.is_admin %> }
+  </script>
 </head>
 
 <body>
-
-  <!-- <% include ../partials/nav.ejs %> -->
 
   <h1><%= app.name %></h1>
 
   <% if (app.config.devMode) { %>
     <em>my guid: <%= user.guid %></em>
+  <% } %>
+
+  <% if (user.full_name) { %>
+    <h3>Hi, <%= user.full_name %>!</h3>
+  <% } else { %>
+    <form action="/api/setname" method="GET" data-form-name="enter-name">
+      <h3>Enter your full name please.</h3>
+      <input name="full_name" placeholder="Enter full name" >
+      <input type="submit" value="Submit" />
+    </form>
   <% } %>
 
   <% if (user.is_admin) { %>

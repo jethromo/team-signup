@@ -7,6 +7,11 @@ body {
     margin: 3rem 0;
 }
 
+.team-signup__team-listing .is-active {
+    font-weight: bold;
+    background: #dedede;
+}
+
 .team-signup__team-listing form [name=full_name] {
     min-width: 300px;
 }
