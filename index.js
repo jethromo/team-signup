@@ -11,13 +11,13 @@ APP_CONFIG.config = {
 
 const table_name = 'members';
 
-const { queryDB, } = require('./database');
+const { queryDB } = require('./database');
 
 var session = require('express-session');
 const md5 = require('md5');
 
 const getGuid = () => {
-  return md5(Math.random().toString(36) + '_' + new Date().getTime() + Math.random().toString(36))
+  return md5(Math.random().toString(36) + '_' + new Date().getTime() + Math.random().toString(36));
 };
 
 const getUser = (req) => {
@@ -37,7 +37,7 @@ const getMembers = () => {
 };
 
 const escapeInsertedString = (string) => {
-  return string.replace(/\'/g, '\'\'')
+  return string.replace(/'/g, '\'\'');
 };
 
 const isTeamFull = (team_id) => {
@@ -51,7 +51,7 @@ const alreadyJoined = (user_guid) => {
 };
 
 const signupUser = (data) => {
-  data.expires = `LOCALTIMESTAMP + interval '3 minute'`;
+  data.expires = 'LOCALTIMESTAMP + interval \'3 minute\'';
   return alreadyJoined(data.guid).then(joined => {
     if (!joined) {
       return isTeamFull(data.team_id).then((full) => {
@@ -65,7 +65,7 @@ const signupUser = (data) => {
               ('${data.guid}', '${escapeInsertedString(data.full_name)}', '${data.team_id}', ${data.expires}, 'true')
           `).then(r => {
             return { success: Array.isArray(r) };
-          })
+          });
         }
       });
     } else {
@@ -77,11 +77,11 @@ const signupUser = (data) => {
 const slugify = (text) => {
   return text.toString().toLowerCase()
     .replace(/\s+/g, '-')           // Replace spaces with -
-    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+    .replace(/[^\w-]+/g, '')        // Remove all non-word chars
+    .replace(/--+/g, '-')           // Replace multiple - with single -
     .replace(/^-+/, '')             // Trim - from start of text
     .replace(/-+$/, '');            // Trim - from end of text
-}
+};
 
 const getTeamConfig = () => {
   return require('./config/teams.json')
@@ -115,7 +115,7 @@ const getDefaultData = (req) => {
       teams: getTeams(members, user),
       members,
       user,
-    }
+    };
   });
 };
 
@@ -131,7 +131,7 @@ express()
     const team = data.teams[req.query.team_id];
     const user = getUser(req);
     user.is_admin = req.query.is_admin === 'true';
-    user.team_id = req.query.team_id
+    user.team_id = req.query.team_id;
     team.members.map((member) => {
       if (member.member_guid === user.guid) {
         user.signedUp = true;
@@ -139,8 +139,8 @@ express()
     });
     res.render('partials/team', {
       user,
-      team
-    })
+      team,
+    });
   }))
 
   .get('/', getHomepage)
