@@ -11,6 +11,10 @@
     </form>
 <% } %>
 
+<% if (team.members.length >= team.slots) { %>
+    <p><em>Sorry, but this team is full.</em></p>
+<% } %>
+
 <% if (team.members.length > 0) { %>
     <h3>Current Members:</h3>
     <ul>
