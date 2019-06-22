@@ -2,6 +2,13 @@
 <h3 class="team-signup__team-leader">Team Leader: <%= team.leader %></h3>
 <p class="team-signup__team-description"><%= team.description %></p>
 
+<% if (team.members.length > 0) { %>
+  <h3>Current Members:</h3>
+  <ul>
+      <% include members.ejs %>
+  </ul>
+<% } %>
+
 <% if (!user.is_admin && user.full_name) { %>
     <% var buttonText = (user.team_id === null) ? 'Sign me up!' : 'You are signed up!'; %>
     <form
@@ -24,11 +31,4 @@
 
 <% if (!user.is_admin && user.team_id === null && team.members.length >= team.slots) { %>
     <p><em>Sorry, but this team is full.</em></p>
-<% } %>
-
-<% if (team.members.length > 0) { %>
-    <h3>Current Members:</h3>
-    <ul>
-        <% include members.ejs %>
-    </ul>
 <% } %>

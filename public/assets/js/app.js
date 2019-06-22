@@ -41,6 +41,7 @@
   }
 
   function refreshPage() {
+    window.location.hash = '#';
     window.location.reload();
   }
 
@@ -101,13 +102,17 @@
     });
   }
 
+  function getContentForCompare(container) {
+    return container.textContent + '{formValues:' + $('input', container).map(function(ele) { return ele.name + '=' + ele.value; }).join('&') + '}';
+  }
+
   function refreshMembers(memberList) {
     var id = memberList.getAttribute('data-team-id');
     getRemote('/team?is_admin=' + window._teamSignupConfig.isAdmin + '&team_id=' + id, function(response) {
-      var before = memberList.textContent;
+      var before = getContentForCompare(memberList);
       var div = document.createElement('div');
       div.innerHTML = response;
-      var after = div.textContent;
+      var after = getContentForCompare(div);
       if (before !== after) {
         console.log('updating team', id);
         memberList.innerHTML = response;
