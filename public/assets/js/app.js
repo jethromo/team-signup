@@ -40,12 +40,18 @@
     request.send();
   }
 
-  function refresh() {
+  function refreshPage() {
     window.location.reload();
   }
 
-  function initHandlers() {
-    $('[data-form-name="enter-name"], [data-form-name="team-signup"]').map(function(form) {
+  function initHandlers(which) {
+    var forms = $('[data-form-name="enter-name"], [data-form-name="team-signup"]');
+    if (which && which.team) {
+      forms = $(
+        '[data-form-name="team-signup"][data-form-team-id="' + which.team + '"]'
+      );
+    }
+    forms.map(function(form) {
       var error = false;
 
       form.onsubmit = function() {
@@ -62,7 +68,16 @@
           apiAction(
             form.action + '?' + queryStr.join('&'),
             function() {
-              refresh();
+              var formName = form.getAttribute('data-form-name');
+              if (formName === 'team-signup') {
+                refreshMembers(
+                  getTeamCard(
+                    form.getAttribute('data-form-team-id')
+                  )
+                );
+              } else if (formName = 'enter-name') {
+                refreshPage();
+              }
             }
           );
         }
@@ -74,7 +89,11 @@
       ele.onclick = function() {
         if (confirm('Are you sure?')) {
           apiAction(ele.getAttribute('href'), function() {
-            refresh();
+            if (ele.getAttribute('data-api-action') === 'team') {
+              refreshAllMembers();
+            } else {
+              refreshPage();
+            }
           });
         }
         return false;
@@ -82,19 +101,37 @@
     });
   }
 
-  function autoRefresh() {
-    setInterval(function() {
-      $('[data-team-id').map(function(memberList) {
-        var id = memberList.getAttribute('data-team-id');
-        getRemote('/team?is_admin=' + window._teamSignupConfig.isAdmin + '&team_id=' + id, function(response) {
-          memberList.innerHTML = response;
-          initHandlers();
-        });
-      });
-    }, window._teamSignupConfig.refreshTeamTime);
+  function refreshMembers(memberList) {
+    var id = memberList.getAttribute('data-team-id');
+    getRemote('/team?is_admin=' + window._teamSignupConfig.isAdmin + '&team_id=' + id, function(response) {
+      var before = memberList.textContent;
+      var div = document.createElement('div');
+      div.innerHTML = response;
+      var after = div.textContent;
+      if (before !== after) {
+        console.log('updating team', id);
+        memberList.innerHTML = response;
+        initHandlers({team: id});
+      }
+    });
   }
 
-  initHandlers();
-  autoRefresh();
+  function getTeamCard(id) {
+    return $('[data-team-card][data-team-id="' + id + '"]')[0];
+  }
+
+  function refreshAllMembers() {
+    $('[data-team-card]').map(refreshMembers);
+  }
+
+  function initApp() {
+    initHandlers();
+    var time = window._teamSignupConfig.refreshTeamTime;
+    if (time) {
+      setInterval(refreshAllMembers, time);
+    }
+  }
+
+  initApp();
 
 })();

@@ -44,6 +44,13 @@ body {
     display: none;
 }
 
+a {
+  color: #40b3b5;
+  text-decoration: none;
+  transition: all .25s ease 0s; }
+  a:hover {
+    color: #1c8e9a; }
+
 input {
     border-radius: 3px;
     border: 2px solid #40b3b5;

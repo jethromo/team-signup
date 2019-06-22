@@ -15,14 +15,14 @@
 
   <% if (user.is_admin) { %>
     <h2>Admin Tools:</h2>
-    <a href="/api/admin/reset" data-api-action>Reset Teams &gt;</a>
+    <a href="/api/admin/reset" data-api-action="team">Reset Teams &gt;</a>
   <% } %>
 
   <% if (user.full_name || user.is_admin) { %>
 
     <% if (!user.is_admin) { %>
       <h3>Hi, <%= user.full_name %>!</h3>
-      <a href="/api/setname?full_name=" data-api-action>Edit My Name</a>
+      <a href="/api/setname?full_name=" data-api-action="page">Edit My Name</a>
     <%  } %>
 
     <% if (app.config.devMode) { %>
@@ -33,7 +33,7 @@
 
     <ol class="team-signup__team-listing">
         <% teams.forEach(function(team){ %>
-          <li data-team-id="<%= team.id %>">
+          <li data-team-card data-team-id="<%= team.id %>">
             <%- include('../partials/team.ejs', { team }); %>
           </li>
         <% }); %>
