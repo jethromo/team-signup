@@ -59,7 +59,7 @@ const signupUser = (data) => {
           return { success: false, reason: 'Sorry, but this team is full.' };
         } else {
           return queryDB(`
-            INSERT INTO ${table_name} 
+            INSERT INTO ${table_name}
               (member_guid, member_name, team_id, expires, confirmed)
             VALUES
               ('${data.guid}', '${escapeInsertedString(data.full_name)}', '${data.team_id}', ${data.expires}, 'true')
@@ -98,9 +98,6 @@ const getTeams = (members, user) => {
     .map((team) => {
       team.members = members.filter((member) => {
         member.isMe = member.member_guid === user.guid;
-        if (member.isMe) {
-          user.signedUp = true;
-        }
         return member.team_id === team.id && member.confirmed === true;
       });
       return team;
@@ -114,6 +111,7 @@ const getDefaultData = (req) => {
     isAdmin: user.is_admin,
   });
   return getMembers().then(members => {
+    user.team_id = members.filter(member => member.member_guid === user.guid)[0];
     return {
       app: APP_CONFIG,
       clientConfig,
@@ -128,22 +126,15 @@ const getHomepage = (req, res) => getDefaultData(req).then(data => res.render('p
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
-  .use(session({cookie: { path: '/', httpOnly: true, maxAge: null }, secret:'eeuqram'}))  
+  .use(session({cookie: { path: '/', httpOnly: true, maxAge: null }, secret:'eeuqram'}))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
-  
+
   .get('/team', (req, res) => getDefaultData(req).then(data => {
     const team = data.teams[req.query.team_id];
-    const user = getUser(req);
-    user.is_admin = req.query.is_admin === 'true';
-    user.team_id = req.query.team_id;
-    team.members.map((member) => {
-      if (member.member_guid === user.guid) {
-        user.signedUp = true;
-      }
-    });
+    data.user.is_admin = req.query.is_admin === 'true';
     res.render('partials/team', {
-      user,
+      user: data.user,
       team,
     });
   }))
@@ -173,7 +164,7 @@ express()
       });
     }
   })
-  
+
   .listen(PORT, () => {
     if (process.send) {
       process.send('online');

@@ -75,7 +75,7 @@
                     form.getAttribute('data-form-team-id')
                   )
                 );
-              } else if (formName = 'enter-name') {
+              } else if (formName === 'enter-name') {
                 refreshPage();
               }
             }
