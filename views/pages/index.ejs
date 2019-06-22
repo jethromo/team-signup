@@ -9,7 +9,11 @@
 
 <body>
 
-  <h1><%= app.name %></h1>
+  <h1 class="team-signup__header-logo">
+    <%- include(app.logo); %> <span class="team-signup__header-logo-text"><%= app.name %></span>
+  </h1>
+
+  <div class="team-signup__content">
 
   <% if (user.is_admin) { %>
     <h2>Admin Tools:</h2>
@@ -28,20 +32,21 @@
 
     <h2>The following teams are available to join:</h2>
 
-    <ul class="team-signup__team-listing">
+    <ol class="team-signup__team-listing">
         <% teams.forEach(function(team){ %>
           <li data-team-id="<%= team.id %>">
             <%- include('../partials/team.ejs', { team }); %>
           </li>
         <% }); %>
-    </ul>
+    </ol>
   <% } else { %>
     <form action="/api/setname" method="GET" data-form-name="enter-name">
-      <h3>Enter your full name please.</h3>
-      <input name="full_name" placeholder="Enter full name" class="team-signup__name-entry" >
+      <input name="full_name" placeholder="Enter your full name please." class="team-signup__name-entry" >
       <input type="submit" value="Submit" />
     </form>
   <% } %>
+
+  </div>
 
   <% if (app.config.devMode) { %>
     <script src="<%= app.config.browserRefreshURL %>"></script>

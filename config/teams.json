@@ -1,50 +1,48 @@
 [
     {
-        "name": "The Fabulous Thunderbirds",
-        "description": "Proin tempor, risus vel mattis mattis, enim sem venenatis arcu, sit amet dapibus sapien urna et erat. Aenean dapibus at nisl id faucibus. Pellentesque egestas tempor dui, eu consequat enim efficitur non. In tristique dignissim tortor. Curabitur pulvinar vitae nibh vel malesuada. Nunc sodales pellentesque ante. Etiam neque magna, lobortis ut congue sit amet, volutpat non massa. Nulla justo enim, rutrum hendrerit orci vitae, interdum eleifend ipsum. Nulla euismod interdum dapibus.",
-        "leader": "Barack Obama",
+        "name": "Embedding Ethical Practices into Community Engagement (\"Do Less Harm\")",
+        "description": "What is our role as a community of practitioners to ensure that the work we do with vulnerable communities is sustainable, ethical, and impactful in a positive way? How can we continue to improve our work and adopt best practices?",
+        "leader": "Bari Rabin",
         "slots": 8
-    },
-    {
-        "name": "The OLAM Warriors",
-        "description": "Nam volutpat, purus id consectetur aliquam, enim nunc placerat tortor, bibendum luctus nunc massa in urna. Duis id commodo ex. Praesent molestie, urna non pulvinar feugiat, libero erat imperdiet metus, ac mattis massa tellus viverra massa. Morbi eleifend sit amet odio id ornare. Ut vestibulum molestie tempus. In hac habitasse platea dictumst. Sed in sodales justo, at posuere augue. Etiam a finibus diam.",
-        "leader": "Bruce Springstein",
+    }, {
+        "name": "Standardizing our work in a diverse Jewish community",
+        "description": "OLAM’s community of partner organizations and practitioners is diverse on many levels. How do we ensure that our work as a growing field meets international standards for best practices in international development, global service, and/or humanitarian aid?",
+        "leader": "Hannah Gaventa",
         "slots": 8
-    },
-    {
-        "name": "",
-        "description": "",
-        "leader": "",
+    }, {
+        "name": "Addressing the Refugee Crisis through Cross Sectoral Partnerships",
+        "description": "What role can we play as a community in assisting refugees, whether at home or in the field? How can partnerships (with the private sector, governments, civil society, the larger Jewish community) help tackle the issues faced by nearly 26 million refugees around the world?",
+        "leader": "Paul Anticoni?",
         "slots": 8
-    },
-    {
-        "name": "",
-        "description": "",
-        "leader": "",
+    }, {
+        "name": "Increasing the Impact of Global Jewish Service Programs",
+        "description": "How do we ensure that global Jewish service programs are leaving a positive impact on both the volunteers and on the communities they serve? How do we ensure the programs continue to grow and to be relevant? What does impact look like and how can it be measured?",
+        "leader": "Arielle Sokoloff",
         "slots": 8
-    },
-    {
-        "name": "",
-        "description": "",
-        "leader": "",
+    }, {
+        "name": "Engaging New and Increased Donors for Global Jewish Service and International Development",
+        "description": "We are all in pursuit of more funding that will allow us to enhance our work and impact more people around the world. How can we, as practitioners, find ways to engage more and new donors and share resources to increase our budgets?",
+        "leader": "Adam Levene?",
         "slots": 8
-    },
-    {
-        "name": "",
-        "description": "",
-        "leader": "",
+    }, {
+        "name": "Creating a Pipeline of Experiences (Service, Academic, Professional) for Young Jews",
+        "description": "Many of us work to recruit, engage, and educate young Jews in global service and international development programs and positions, with the aim of building a next generation that can address the world’s most pressing challenges. How can we purposefully collaborate to ensure that alumni of short-term experiences are aware of and directed towards additional opportunities to deepen their commitment to global Jewish service and international development? How can we work together to provide continued opportunities at various levels in order to increase numbers and reach a shared vision?",
+        "leader": "Reut Barak Weekes",
         "slots": 8
-    },
-    {
-        "name": "",
-        "description": "",
-        "leader": "",
+    }, {
+        "name": "Raising Awareness about Global Service and International Development in the Jewish Community",
+        "description": "How can we raise the profile of our work, as individuals, organizations, and a growing field among the larger Jewish community? What are ways to educate those who don’t work in the fields about global Jewish service and international development in order to reach more volunteers, funding, partnerships, and ultimately help more people in the developing world?",
+        "name": "Team Leader:  Kate Belza",
         "slots": 8
-    },
-    {
-        "name": "",
-        "description": "",
-        "leader": "",
+    }, {
+        "name": "Advocating for the World's Under-Reported Humanitarian Crises",
+        "description": "With so many mass atrocities happening around us, how do we enhance the engagement of the larger Jewish community on humanitarian crises? How do we get more people to take an active role in relief and prevention efforts, and together ensure as a community that we live out our values of responding to suffering?",
+        "leader": "Merril Zack",
+        "slots": 8
+    }, {
+        "name": "Fueling connections and collaborations within the OLAM community outside of Focal Point",
+        "description": "The OLAM community includes a diverse group of organizations and individuals who are based all over the world and whose work overlaps in many ways. How do we take our own initiative to tap into the potential for continued networking and collaboration year-round in order to enhance our work and grow the fields of global Jewish service and international development?",
+        "leader": "Sarah Wilner",
         "slots": 8
     }
 ]

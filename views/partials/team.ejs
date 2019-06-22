@@ -1,9 +1,9 @@
-<h2><%= team.name %></h2>
-<h3>Led by <%= team.leader %></h3>
-<p><%= team.description %></p>
+<h2 class="team-signup__team-name"><%= team.name %></h2>
+<h3 class="team-signup__team-leader">Team Leader: <%= team.leader %></h3>
+<p class="team-signup__team-description"><%= team.description %></p>
 
 <% if (!user.signedUp && user.full_name) { %>
-    <form action="/api/signup" method="GET" data-form-name="team-signup" data-form-slug="<%= team.slug %>" class="<%= (team.members.length < team.slots) ? '' : 'is-hidden' %>">
+    <form action="/api/signup" method="GET" data-form-name="team-signup" data-form-slug="<%= team.slug %>" class="team-signup__signup-form <%= (team.members.length < team.slots) ? '' : 'is-hidden' %>">
         <input type="hidden" name="guid" value="<%= user.guid %>" />
         <input type="hidden" name="team_id" value="<%= team.id %>" />
         <input type="hidden" name="full_name" value="<%= user.full_name %>" />
