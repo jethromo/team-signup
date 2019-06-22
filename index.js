@@ -109,9 +109,14 @@ const getTeams = (members, user) => {
 
 const getDefaultData = (req) => {
   const user = getUser(req);
+  const clientConfig = JSON.stringify({
+    refreshTeamTime: APP_CONFIG.refreshTeamTime,
+    isAdmin: user.is_admin,
+  });
   return getMembers().then(members => {
     return {
       app: APP_CONFIG,
+      clientConfig,
       teams: getTeams(members, user),
       members,
       user,

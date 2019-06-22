@@ -12,9 +12,9 @@
     request.open('GET', url, true);
     request.onload = function() {
       var json = JSON.parse(request.responseText);
-      if (request.status >= 200 && 
-            request.status < 400 && 
-            request.responseText && 
+      if (request.status >= 200 &&
+            request.status < 400 &&
+            request.responseText &&
             json.success === true
       ) {
         success(request);
@@ -47,7 +47,7 @@
   function initHandlers() {
     $('[data-form-name="enter-name"], [data-form-name="team-signup"]').map(function(form) {
       var error = false;
-        
+
       form.onsubmit = function() {
         var queryStr = [];
         $('input', form).map(function(formEle) {
@@ -60,7 +60,7 @@
         });
         if (!error) {
           apiAction(
-            form.action + '?' + queryStr.join('&'), 
+            form.action + '?' + queryStr.join('&'),
             function() {
               refresh();
             }
@@ -69,7 +69,7 @@
         return false;
       };
     });
-    
+
     $('[data-api-action]').map(function(ele) {
       ele.onclick = function() {
         if (confirm('Are you sure?')) {
@@ -86,12 +86,12 @@
     setInterval(function() {
       $('[data-team-id').map(function(memberList) {
         var id = memberList.getAttribute('data-team-id');
-        getRemote('/team?is_admin=' + window.config.is_admin.toString() + '&team_id=' + id, function(response) {
+        getRemote('/team?is_admin=' + window._teamSignupConfig.isAdmin + '&team_id=' + id, function(response) {
           memberList.innerHTML = response;
           initHandlers();
         });
       });
-    }, 900);
+    }, window._teamSignupConfig.refreshTeamTime);
   }
 
   initHandlers();

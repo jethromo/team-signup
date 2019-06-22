@@ -4,33 +4,32 @@ body {
 }
 
 .team-signup__content {
-    margin: 36px;
+    margin: 24px;
 }
 
 .team-signup__header-logo {
     background: #023139;
     color: #fff;
-    font-size: 28px;
+    font-size: 20px;
     margin: 0;
     padding: 24px;
     padding-top: 40px;
 }
 
 .team-signup__header-logo svg {
-    width: 200px;
+    width: 150px;
     vertical-align: middle;
     position: relative;
-    top: -.39em;
+    top: -.22em;
 }
 
-.team-signup__header-logo-text {
-    text-indent: -76px;
-    display: inline-block;
-    overflow: hidden;
+.team-signup__team-listing {
+    margin: 0 1rem;
+    padding: 0;
 }
 
 .team-signup__team-listing > li {
-    margin: 4rem 0;
+    margin: 2rem 0;
 }
 
 .team-signup__team-listing .is-active {
@@ -50,7 +49,7 @@ input {
     border: 2px solid #40b3b5;
     width: 100% !important;
     padding: 1em;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     -webkit-transition: all .25s ease 0s;
     transition: all .25s ease 0s;
     margin: 12px 0;
@@ -67,5 +66,5 @@ input[type=submit] {
     cursor: pointer;
     width: 100%;
     padding: .7em 2em;
-    border-radius: 0;
+    font-weight: bold;
 }

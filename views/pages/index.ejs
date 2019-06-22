@@ -2,15 +2,13 @@
 <html>
 <head>
   <% include ../partials/header.ejs %>
-  <script>
-  var config = { is_admin: <%= user.is_admin %> }
-  </script>
 </head>
 
 <body>
 
-  <h1 class="team-signup__header-logo">
-    <%- include(app.logo); %> <span class="team-signup__header-logo-text"><%= app.name %></span>
+  <h1 class="team-signup__header-logo" title="<%= app.name %>">
+    <%- include(app.logo); %>
+    <span class="team-signup__header-logo-text"><%- app.header_logo_text || app.name %></span>
   </h1>
 
   <div class="team-signup__content">
@@ -21,16 +19,17 @@
   <% } %>
 
   <% if (user.full_name || user.is_admin) { %>
-    <h3>Hi, <%= user.full_name || 'admin' %>!</h3>
+
     <% if (!user.is_admin) { %>
-      <a href="/api/setname?full_name=" data-api-action>Clear Name</a>
+      <h3>Hi, <%= user.full_name %>!</h3>
+      <a href="/api/setname?full_name=" data-api-action>Edit My Name</a>
     <%  } %>
 
     <% if (app.config.devMode) { %>
       <p><em>my guid: <%= user.guid %></em></p>
     <% } %>
 
-    <h2>The following teams are available to join:</h2>
+    <h2>Choose your team:</h2>
 
     <ol class="team-signup__team-listing">
         <% teams.forEach(function(team){ %>
@@ -50,7 +49,7 @@
 
   <% if (app.config.devMode) { %>
     <script src="<%= app.config.browserRefreshURL %>"></script>
-  <% } %>  
+  <% } %>
 
   <script src="/assets/js/app.js"></script>
 </body>
