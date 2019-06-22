@@ -75,3 +75,8 @@ input[type=submit] {
     padding: .7em 2em;
     font-weight: bold;
 }
+
+input[type=submit]:disabled {
+  background: #ccc;
+  pointer-events: none;
+}

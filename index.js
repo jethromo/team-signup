@@ -111,7 +111,12 @@ const getDefaultData = (req) => {
     isAdmin: user.is_admin,
   });
   return getMembers().then(members => {
-    user.team_id = members.filter(member => member.member_guid === user.guid)[0];
+    const me = members.filter(member => member.member_guid === user.guid)[0];
+    if (typeof me !== 'undefined' && typeof me.team_id !== 'undefined') {
+      user.team_id = me.team_id;
+    } else {
+      user.team_id = null;
+    }
     return {
       app: APP_CONFIG,
       clientConfig,
