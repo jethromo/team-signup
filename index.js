@@ -131,7 +131,16 @@ const getHomepage = (req, res) => getDefaultData(req).then(data => res.render('p
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
-  .use(session({cookie: { path: '/', httpOnly: true, maxAge: null }, secret:'eeuqram'}))
+  .use(session({
+    cookie: {
+      path: '/',
+      httpOnly: true,
+      maxAge: null,
+    },
+    secret:'eeuqram',
+    resave: true,
+    saveUninitialized: true,
+  }))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
 
