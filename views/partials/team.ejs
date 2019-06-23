@@ -8,7 +8,7 @@
       <% include members.ejs %>
   </ul>
 <% } else { %>
-  <p><em>No one has joined this team yet.</em></p>
+  <p>&nbsp;<br /><em>No one has joined this team yet.</em></p>
 <% } %>
 
 <% if (!user.is_admin && user.full_name) { %>
@@ -21,7 +21,7 @@
       buttonText = 'You are signed up';
     } else if (user.team_id !== null) {
       buttonDisabled = true;
-      buttonText = 'Joined another team';
+      buttonText = 'You have joined another team';
     } else if (team.members.length >= team.slots) {
       buttonDisabled = true;
       buttonText = 'Team is full';

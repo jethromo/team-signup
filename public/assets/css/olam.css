@@ -1,38 +1,48 @@
 body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
 }
 
 .team-signup__content {
-    margin: 24px;
+  margin: 24px;
 }
 
 .team-signup__header-logo {
-    background: #023139;
-    color: #fff;
-    font-size: 18px;
-    white-space: nowrap;
-    margin: 0;
-    padding: 24px;
-    padding-top: 32px;
+  background: #023139;
+  color: #fff;
+  font-size: 18px;
+  white-space: nowrap;
+  margin: 0;
+  padding: 24px;
+  padding-top: 32px;
 }
 
 .team-signup__header-logo svg {
-    width: 150px;
-    vertical-align: middle;
-    position: relative;
-    top: -.26em;
+  width: 150px;
+  vertical-align: middle;
+  position: relative;
+  top: -.26em;
 }
 
 .team-signup__team-listing {
-    margin: 0 1rem;
-    padding: 0;
+  margin: 0 1rem;
+  padding: 0;
 }
 
 .team-signup__team-listing > li {
-    margin-bottom: 3rem;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 3rem;
+  position: relative;
+  margin: 1rem 0 3rem;
+  padding: 0 0 3rem;
+}
+
+.team-signup__team-listing > li::after {
+  display: block;
+  content: ' ';
+  position: absolute;
+  bottom: 0;
+  left: -1rem;
+  right: -1rem;
+  border-bottom: 1px solid #ccc;
 }
 
 .team-signup__team-listing li li {
@@ -40,30 +50,33 @@ body {
 }
 
 .team-signup__team-listing .is-active {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .is-hidden {
-    display: none;
+  display: none;
 }
 
 a {
   color: #40b3b5;
   text-decoration: none;
-  transition: all .25s ease 0s; }
-  a:hover {
-    color: #1c8e9a; }
+  transition: all .25s ease 0s;
+}
+
+a:hover {
+  color: #1c8e9a;
+}
 
 input {
-    border-radius: 3px;
-    border: 2px solid #40b3b5;
-    width: 100% !important;
-    padding: 1em;
-    font-size: 1.3rem;
-    -webkit-transition: all .25s ease 0s;
-    transition: all .25s ease 0s;
-    margin: 1.5rem 0 0 0;
-    box-sizing: border-box;
+  border-radius: 3px;
+  border: 2px solid #40b3b5;
+  width: 100% !important;
+  padding: 1em;
+  font-size: 1.3rem;
+  -webkit-transition: all .25s ease 0s;
+  transition: all .25s ease 0s;
+  margin: 1.5rem 0 0 0;
+  box-sizing: border-box;
 }
 
 input:first-child {
@@ -71,16 +84,16 @@ input:first-child {
 }
 
 input[type=submit] {
-    background: #40b3b5;
-    color: white;
-    font-size: 1.33333rem;
-    clear: both;
-    border: 2px solid transparent;
-    text-transform: uppercase;
-    cursor: pointer;
-    width: 100%;
-    padding: .7em 2em;
-    font-weight: bold;
+  background: #40b3b5;
+  color: white;
+  font-size: 1.33333rem;
+  clear: both;
+  border: 2px solid transparent;
+  text-transform: uppercase;
+  cursor: pointer;
+  width: 100%;
+  padding: .7em 2em;
+  font-weight: bold;
 }
 
 input[type=submit]:disabled {
