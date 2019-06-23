@@ -18,7 +18,7 @@
 
     if (user.team_id !== null) {
       buttonDisabled = true;
-      buttonText = 'Signed up for ' + (user.team_id === team.id ? 'this team' : 'team ' + (parseInt(user.team_id) + 1));
+      buttonText = 'Signed up' + (user.team_id === team.id ? '!' : ': team ' + (parseInt(user.team_id) + 1));
     } else if (team.members.length >= team.slots) {
       buttonDisabled = true;
       buttonText = 'Team is full';
