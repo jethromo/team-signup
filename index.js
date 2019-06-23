@@ -46,14 +46,14 @@ const isTeamFull = (team_id) => {
   });
 };
 
-const alreadyJoined = (user_guid) => {
+const alreadySignedUp = (user_guid) => {
   return queryDB(`SELECT * FROM ${table_name} WHERE member_guid = '${user_guid}' AND confirmed = true`).then(found => found.length > 0);
 };
 
 const signupUser = (data) => {
   data.expires = 'LOCALTIMESTAMP + interval \'3 minute\'';
-  return alreadyJoined(data.guid).then(joined => {
-    if (!joined) {
+  return alreadySignedUp(data.guid).then(signedUp => {
+    if (!signedUp) {
       return isTeamFull(data.team_id).then((full) => {
         if (full) {
           return { success: false, reason: 'Sorry, but this team is full.' };
@@ -69,7 +69,7 @@ const signupUser = (data) => {
         }
       });
     } else {
-      return { success: false, reason: 'You already joined a team!' };
+      return { success: false, reason: 'You already signed up a team!' };
     }
   });
 };
