@@ -10,7 +10,8 @@ body {
 .team-signup__header-logo {
     background: #023139;
     color: #fff;
-    font-size: 20px;
+    font-size: 18px;
+    white-space: nowrap;
     margin: 0;
     padding: 24px;
     padding-top: 40px;
@@ -20,7 +21,7 @@ body {
     width: 150px;
     vertical-align: middle;
     position: relative;
-    top: -.22em;
+    top: -.26em;
 }
 
 .team-signup__team-listing {
