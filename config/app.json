@@ -2,5 +2,6 @@
     "name": "OLAMathon Team Signup",
     "logo": "../../public/assets/images/olam-logo.svg",
     "header_logo_text": "athon Team Signup",
+    "cssFile": "olam.css",
     "refreshTeamTime": 1300
 }
