@@ -32,6 +32,10 @@ body {
     margin: 2rem 0;
 }
 
+.team-signup__team-listing li li {
+  margin: .6rem 0;
+}
+
 .team-signup__team-listing .is-active {
     font-weight: bold;
 }
