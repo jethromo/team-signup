@@ -45,6 +45,22 @@
     window.location.reload();
   }
 
+  function smoothScrollTo(element, offset) {
+    var el = typeof element === 'string' ? $(element)[0] : element;
+    if (window.scrollTo && el) {
+      var bodyRect = document.body.getBoundingClientRect(),
+        elemRect = el.getBoundingClientRect(),
+        top = elemRect.top - bodyRect.top;
+
+      if (top) {
+        window.scrollTo({
+          top: top + (offset || 0),
+          behavior: 'smooth',
+        });
+      }
+    }
+  }
+
   function initHandlers(which) {
     var forms = $('[data-form-name="enter-name"], [data-form-name="team-signup"]');
     if (which && which.team) {
@@ -78,7 +94,10 @@
                 refreshMembers(
                   getTeamCard(
                     form.getAttribute('data-form-team-id')
-                  )
+                  ),
+                  function(memberList) {
+                    smoothScrollTo(memberList, -16);
+                  }
                 );
               } else if (formName === 'enter-name') {
                 refreshPage();
@@ -110,7 +129,7 @@
     return container.textContent + '{formValues:' + $('input', container).map(function(ele) { return ele.name + '=' + ele.value; }).join('&') + '}';
   }
 
-  function refreshMembers(memberList) {
+  function refreshMembers(memberList, callback) {
     var id = memberList.getAttribute('data-team-id');
     getRemote('/team?is_admin=' + window._teamSignupConfig.isAdmin + '&team_id=' + id, function(response) {
       var before = getContentForCompare(memberList);
@@ -121,6 +140,9 @@
         console.log('updating team', id);
         memberList.innerHTML = response;
         initHandlers({team: id});
+        if (typeof callback === 'function') {
+          callback(memberList);
+        }
       }
     });
   }

@@ -3,7 +3,7 @@
 <p class="team-signup__team-description"><%= team.description %></p>
 
 <% if (team.members.length > 0) { %>
-  <h3>Current Members:</h3>
+  <h3 id="member_listing_<%= team.id %>">Current Members:</h3>
   <ul>
       <% include members.ejs %>
   </ul>
