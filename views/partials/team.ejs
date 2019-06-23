@@ -7,28 +7,38 @@
   <ul>
       <% include members.ejs %>
   </ul>
+<% } else { %>
+  <p><em>No one has joined this team yet.</em></p>
 <% } %>
 
 <% if (!user.is_admin && user.full_name) { %>
-    <% var buttonText = (user.team_id === null) ? 'Sign me up!' : 'You are signed up!'; %>
+    <%
+    var buttonDisabled = false;
+    var buttonText = 'Sign me up!';
+
+    if (user.team_id === team.id) {
+      buttonDisabled = true;
+      buttonText = 'You are signed up';
+    } else if (user.team_id !== null) {
+      buttonDisabled = true;
+      buttonText = 'Joined another team';
+    } else if (team.members.length >= team.slots) {
+      buttonDisabled = true;
+      buttonText = 'Team is full';
+    }
+    %>
+
     <form
       action="/api/signup"
       method="GET"
       data-form-name="team-signup"
       data-form-slug="<%= team.slug %>"
       data-form-team-id="<%= team.id %>"
-      class="
-        team-signup__signup-form
-        <%= (team.members.length < team.slots) ? '' : 'is-hidden' %>
-      "
+      class="team-signup__signup-form"
     >
         <input type="hidden" name="guid" value="<%= user.guid %>" />
         <input type="hidden" name="team_id" value="<%= team.id %>" />
         <input type="hidden" name="full_name" value="<%= user.full_name %>" />
-        <input type="submit" value="<%= buttonText %>" <% if (user.team_id !== null) { %>disabled<% } %> />
+        <input type="submit" value="<%= buttonText %>" <% if (buttonDisabled) { %>disabled<% } %> />
     </form>
-<% } %>
-
-<% if (!user.is_admin && user.team_id === null && team.members.length >= team.slots) { %>
-    <p><em>Sorry, but this team is full.</em></p>
 <% } %>

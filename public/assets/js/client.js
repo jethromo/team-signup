@@ -66,6 +66,10 @@
           }
         });
         if (!error) {
+          $('[type=submit]').map(function(btn) {
+            btn.setAttribute('disabled', 'disabled');
+            btn.value = 'Loading...';
+          });
           apiAction(
             form.action + '?' + queryStr.join('&'),
             function() {

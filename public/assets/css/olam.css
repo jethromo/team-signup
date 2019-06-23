@@ -14,7 +14,7 @@ body {
     white-space: nowrap;
     margin: 0;
     padding: 24px;
-    padding-top: 40px;
+    padding-top: 32px;
 }
 
 .team-signup__header-logo svg {
@@ -30,7 +30,9 @@ body {
 }
 
 .team-signup__team-listing > li {
-    margin: 2rem 0;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 3rem;
 }
 
 .team-signup__team-listing li li {
@@ -41,9 +43,6 @@ body {
     font-weight: bold;
 }
 
-.team-signup__team-description {
-    font-style: italic;
-}
 .is-hidden {
     display: none;
 }
@@ -63,8 +62,12 @@ input {
     font-size: 1.3rem;
     -webkit-transition: all .25s ease 0s;
     transition: all .25s ease 0s;
-    margin: 12px 0;
+    margin: 1.5rem 0 0 0;
     box-sizing: border-box;
+}
+
+input:first-child {
+  margin: 0;
 }
 
 input[type=submit] {
