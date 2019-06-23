@@ -92,7 +92,8 @@ input[type=submit] {
   text-transform: uppercase;
   cursor: pointer;
   width: 100%;
-  padding: .7em 2em;
+  padding: .7em 1em;
+  text-align: center;
   font-weight: bold;
 }
 
