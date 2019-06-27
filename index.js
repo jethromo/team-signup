@@ -112,6 +112,8 @@ const getDefaultData = (req) => {
   });
   return getMembers().then(members => {
     const me = members.filter(member => member.member_guid === user.guid)[0];
+    const teams = getTeams(members, user);
+    const memberCount = members.filter(member => teams.filter(team => team.id === member.team_id).length > 0).length;
     if (typeof me !== 'undefined' && typeof me.team_id !== 'undefined') {
       user.team_id = me.team_id;
     } else {
@@ -120,14 +122,17 @@ const getDefaultData = (req) => {
     return {
       app: APP_CONFIG,
       clientConfig,
-      teams: getTeams(members, user),
+      teams,
       members,
+      memberCount,
       user,
     };
   });
 };
 
 const getHomepage = (req, res) => getDefaultData(req).then(data => res.render('pages/index', data));
+
+const getMemberListPage = (req, res) => getDefaultData(req).then(data => res.render('pages/member_list', data));
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
@@ -155,6 +160,7 @@ express()
 
   .get('/', getHomepage)
   .get('/admin', getHomepage)
+  .get('/members', getMemberListPage)
 
   .get('/api/setname', (req, res) => {
     req.session.full_name = req.query.full_name;

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+  <% include ../partials/branding_header.ejs %>
+  <div class="team-signup__content">
+    <p><%= memberCount %> members have signed up!</p>
+    <ol class="team-signup__team-listing">
+      <% teams.forEach(function(team){ %>
+        <li>
+          <h2 class="team-signup__team-name"><%= team.name %></h2>
+          <% if (team.members.length > 0) { %>
+            <h3>Current Members:</h3>
+            <ul>
+              <% team.members.forEach(function(member){ %>
+                <li>
+                    <%= member.member_name %>
+                </li>
+              <% }); %>
+            </ul>
+          <% } else { %>
+            <p>&nbsp;<br /><em>No one has signed up for this team yet.</em></p>
+          <% } %>
+        </li>
+      <% }); %>
+    </ol>
+  </div>
+  <% if (app.config.devMode) { %>
+    <script src="<%= app.config.browserRefreshURL %>"></script>
+  <% } %>
+</body>
+</html>

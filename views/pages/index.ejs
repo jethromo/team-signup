@@ -12,7 +12,9 @@
 
   <% if (user.is_admin) { %>
     <h2>Admin Tools:</h2>
-    <a href="/api/admin/reset" data-api-action="team">Reset Teams &gt;</a>
+    <p><a href="/api/admin/reset" data-api-action="team">Reset Teams &gt;</a></p>
+    <p><a href="/members">Get Final Member List &gt;</a></p>
+    <hr />
   <% } %>
 
   <% if (user.full_name || user.is_admin) { %>
@@ -24,6 +26,7 @@
 
     <% if (app.config.devMode) { %>
       <p><em>my guid: <%= user.guid %></em></p>
+      <hr />
     <% } %>
 
     <h2>Choose a team:</h2>
