@@ -77,6 +77,7 @@
           if (formEle.name === 'full_name' && formEle.value.length === 0) {
             alert('Enter your name please!');
             error = true;
+            refreshPage();
           } else {
             queryStr.push(formEle.name + '=' + encodeURIComponent(formEle.value));
           }
